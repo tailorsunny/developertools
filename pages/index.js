@@ -1,26 +1,27 @@
 // developerstool.codes
 import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../components/SEO'
+
 import BoxShadowGenerator from '../components/BoxShadowGenerator';
 import { getAllPresets } from '../utils/presets';
 import styles from '../styles/Home.module.css';  // Add this import
 
-export default function Home({ presets }) {
+export default function Home({ pageTitle, pageDescription, pageKeywords }) {
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Box Shadow Generator</title>
-        <meta name="description" content="Create custom CSS box shadows with our easy-to-use generator" />
-        <meta name="keywords" content="CSS, box-shadow, generator, web design" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <SEO
+        title={pageTitle}
+        description={pageDescription}
+        keywords={pageKeywords}
+      />
 
       <main className={styles.main}>
         <h1 className={styles.title}>Box Shadow Generator</h1>
-        
+
         <BoxShadowGenerator />
 
-        <section className={styles.presets}>
+        {/* <section className={styles.presets}>
           <h2>Presets</h2>
           <ul>
             {presets.map((preset) => (
@@ -31,11 +32,11 @@ export default function Home({ presets }) {
               </li>
             ))}
           </ul>
-        </section>
+        </section> */}
       </main>
 
       <footer className={styles.footer}>
-        <p>Created with Next.js</p>
+        <p>developertools.tools</p>
       </footer>
     </div>
   );
@@ -44,6 +45,10 @@ export default function Home({ presets }) {
 export async function getStaticProps() {
   const presets = getAllPresets();
   return {
-    props: { presets },
+    props: {
+      pageTitle: "Box Shadow Generator",
+      pageDescription: "Create custom CSS box shadows with our easy-to-use Box Shadow Generator tool",
+      pageKeywords: "Box Shadow Generator, CSS tool, web design, shadow effects",
+    },
   };
 }

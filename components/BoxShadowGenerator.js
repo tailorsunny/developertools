@@ -13,6 +13,7 @@ const BoxShadowGenerator = ({ initialValues }) => {
     opacity: 1,
     outline: 0,
     inset: false,
+    borderRadius: 0,
   });
   const [copied, setCopied] = useState(false);
 
@@ -29,11 +30,13 @@ const BoxShadowGenerator = ({ initialValues }) => {
     backgroundColor: values.boxColor,
     boxShadow,
     outline: `${values.outline}px solid ${values.shadowColor}`,
+    borderRadius: `${values.borderRadius}px`
+    ,
   };
   const cssCode = `box-shadow: ${boxShadow};
 background-color: ${values.backgroundColor};
-outline: ${values.outline}px solid ${values.shadowColor};`;
-
+outline: ${values.outline}px solid ${values.shadowColor};
+border-radius: ${values.borderRadius}px;`;
   const copyToClipboard = () => {
     navigator.clipboard.writeText(cssCode).then(() => {
       setCopied(true);
@@ -92,13 +95,19 @@ outline: ${values.outline}px solid ${values.shadowColor};`;
           Inset:
           <input type="checkbox" name="inset" checked={values.inset} onChange={handleChange} />
         </label>
+        <label>
+          Border Radius:
+          <input type="range" name="borderRadius" min="0" max="100" value={values.borderRadius} onChange={handleChange} />
+          <span>{values.borderRadius}px</span>
+        </label>
       </div>
       <div className={styles.codeContainer}>
         <pre className={styles.code}>{cssCode}</pre>
-        <button onClick={copyToClipboard} className={styles.copyButton}>
-          {copied ? 'Copied!' : 'Copy to Clipboard'}
-        </button>
+
       </div>
+      <button onClick={copyToClipboard} className={styles.copyButton}>
+        {copied ? 'Copied!' : 'Copy to Clipboard'}
+      </button>
     </div>
   );
 };
