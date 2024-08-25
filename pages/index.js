@@ -36,7 +36,7 @@ export default function Home({ pageTitle, pageDescription, pageKeywords }) {
       </main>
 
       <footer className={styles.footer}>
-        <p>developertools.tools</p>
+        <p>developertools.dev</p>
       </footer>
     </div>
   );
